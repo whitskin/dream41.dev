@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
-    'nuxt-og-image' // <-- YENİ EKLENDİ
+    'nuxt-og-image',
+    '@vueuse/motion/nuxt'
   ],
 
   // Sitenin canlıdaki adresi (Burası önemli, yoksa resim çıkmaz)

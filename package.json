@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@vueuse/motion": "^3.0.3",
     "nuxt": "^4.2.2",
     "sharp": "^0.34.5",
     "vue": "^3.5.26",
