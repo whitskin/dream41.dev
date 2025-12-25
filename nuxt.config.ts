@@ -4,7 +4,9 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
     'nuxt-og-image',
-    '@vueuse/motion/nuxt'
+    '@vueuse/motion/nuxt',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots'
   ],
 
   // Sitenin canlıdaki adresi (Burası önemli, yoksa resim çıkmaz)
@@ -22,6 +24,9 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'en' // Siten İngilizce olduğu için 'en', Türkçe ise 'tr' yap.
+      },
       title: 'Dream41 | Full-Stack Developer Portfolio',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -45,5 +50,20 @@ ogImage: {
       'Inter:900'
     ]
   },
+
+  robots: {
+    UserAgent: '*',
+    Allow: '/',
+    Sitemap: 'https://dream41.dev/sitemap.xml'
+  },
+
+sitemap: {
+    defaults: {
+      changefreq: 'daily',
+      priority: 1,
+      lastmod: new Date()
+    }
+  },
+
   devtools: { enabled: true }
 })
