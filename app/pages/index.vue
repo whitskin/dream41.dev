@@ -69,7 +69,7 @@
         <div v-if="discordData" v-motion :initial="{ opacity: 0, scale: 0.9 }" :enter="{ opacity: 1, scale: 1, transition: { delay: 500 } }" class="flex justify-center mt-6">
            <div class="flex items-center gap-4 p-2 pr-6 rounded-full bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-white/10 shadow-lg backdrop-blur-md">
               <div class="relative">
-                 <img :src="`https://cdn.discordapp.com/avatars/${discordData.discord_user.id}/${discordData.discord_user.avatar}.png`" class="w-10 h-10 rounded-full" alt="Avatar" />
+                 <img :src="`https://cdn.discordapp.com/avatars/${discordData.discord_user.id}/${discordData.discord_user.avatar}`" class="w-10 h-10 rounded-full" alt="Avatar" />
                  <div class="absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white dark:border-zinc-900" :class="statusColor"></div>
               </div>
               <div class="text-left">
@@ -120,42 +120,61 @@
             <h2 class="text-4xl font-bold text-zinc-900 dark:text-white tracking-tight">Selected Work</h2>
          </div>
 
-         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <SpotlightCard class="md:col-span-2 group">
-               <div class="h-[350px] sm:h-[450px] w-full overflow-hidden bg-zinc-100 dark:bg-[#121212] relative">
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <SpotlightCard class="group h-full">
+               <div class="h-[300px] w-full overflow-hidden bg-zinc-100 dark:bg-[#121212] relative">
                   <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-zinc-900 to-transparent z-10 opacity-60"></div>
                   <img src="/images/grafiklab.png" alt="GrafikLab" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-1 transition-transform duration-700 ease-out" />
                </div>
-               <div class="p-10 relative z-20">
+               <div class="p-8 relative z-20">
                   <div class="flex gap-2 mb-4">
+                     <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-xs font-bold text-zinc-600 dark:text-zinc-300">PHP</span>
                      <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-xs font-bold text-zinc-600 dark:text-zinc-300">Laravel</span>
                   </div>
-                  <h3 class="text-3xl font-bold text-zinc-900 dark:text-white mb-3">GrafikLab.NET</h3>
-                  <p class="text-lg text-zinc-600 dark:text-zinc-400 mb-8 max-w-lg">Premium digital platform.</p>
-                  <a href="https://grafiklab.net" target="_blank" class="inline-flex items-center gap-2 text-base font-bold text-indigo-600 dark:text-indigo-400 hover:gap-4 transition-all">Visit Website <ArrowUpRightIcon class="w-5 h-5" /></a>
+                  <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-3">GrafikLab.NET</h3>
+                  <p class="text-base text-zinc-600 dark:text-zinc-400 mb-6">Premium digital platform offering robust API integrations.</p>
+                  <a href="https://grafiklab.net" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:gap-3 transition-all">Visit Website <ArrowUpRightIcon class="w-4 h-4" /></a>
                </div>
             </SpotlightCard>
 
-            <div class="flex flex-col gap-8">
-                <SpotlightCard class="flex-1 group">
-                   <div class="p-10 flex flex-col justify-between h-full relative overflow-hidden">
-                      <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-bl-full blur-2xl group-hover:bg-indigo-500/20 transition-all"></div>
-                      <div>
-                         <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center mb-6"><CloudIcon class="w-7 h-7" /></div>
-                         <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2">SubManager</h3>
-                         <p class="text-base text-zinc-600 dark:text-zinc-400">Subscription tracking.</p>
-                      </div>
-                      <div class="mt-6 flex items-center gap-2 text-xs font-bold text-amber-500 uppercase tracking-wider"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> In Development</div>
-                   </div>
-                </SpotlightCard>
+            <SpotlightCard class="group h-full">
+               <div class="h-[300px] w-full overflow-hidden bg-zinc-100 dark:bg-[#121212] relative">
+                  <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-zinc-900 to-transparent z-10 opacity-60"></div>
+                  <img src="/images/sporapi.png" alt="SporApi" class="w-full h-full object-cover group-hover:scale-110 group-hover:rotate-1 transition-transform duration-700 ease-out" />
+               </div>
+               <div class="p-8 relative z-20">
+                  <div class="flex gap-2 mb-4">
+                    <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-xs font-bold text-zinc-600 dark:text-zinc-300">NUXT</span>
+                    <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-xs font-bold text-zinc-600 dark:text-zinc-300">VUE</span>
+                    <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-xs font-bold text-zinc-600 dark:text-zinc-300">WebSocket</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-3">SPOR.GrafikLab</h3>
+                  <p class="text-base text-zinc-600 dark:text-zinc-400 mb-6">Live sports API service with real-time scores.</p>
+                  <a href="https://spor.grafiklab.net" target="_blank" class="inline-flex items-center gap-2 text-sm font-bold text-indigo-600 dark:text-indigo-400 hover:gap-3 transition-all">Visit Website <ArrowUpRightIcon class="w-4 h-4" /></a>
+               </div>
+            </SpotlightCard>
 
-                <div class="flex-1 group rounded-[2.5rem] bg-zinc-50 dark:bg-white/[0.02] border border-dashed border-zinc-300 dark:border-white/10 p-10 flex flex-col justify-center items-center text-center hover:bg-zinc-100 dark:hover:bg-white/5 transition-all cursor-pointer">
-                   <div class="w-16 h-16 rounded-full bg-white dark:bg-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
-                      <RocketLaunchIcon class="w-8 h-8 text-zinc-400 dark:text-white" />
-                   </div>
-                   <h3 class="text-xl font-bold text-zinc-900 dark:text-white">Next Big Thing</h3>
-                </div>
+            <SpotlightCard class="group h-full min-h-[300px]">
+               <div class="p-10 flex flex-col justify-between h-full relative overflow-hidden">
+                  <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-bl-full blur-2xl group-hover:bg-indigo-500/20 transition-all"></div>
+                  <div>
+                     <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center mb-6"><CloudIcon class="w-7 h-7" /></div>
+                     <h3 class="text-2xl font-bold text-zinc-900 dark:text-white mb-2">LUMINA</h3>
+                     <p class="text-base text-zinc-600 dark:text-zinc-400">EPIN SCRIPT.</p>
+                  </div>
+                  <div class="mt-6 flex items-center gap-2 text-xs font-bold text-amber-500 uppercase tracking-wider"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> In Development</div>
+               </div>
+            </SpotlightCard>
+
+            <div class="group h-full min-h-[300px] rounded-[2.5rem] bg-zinc-50 dark:bg-white/[0.02] border border-dashed border-zinc-300 dark:border-white/10 p-10 flex flex-col justify-center items-center text-center hover:bg-zinc-100 dark:hover:bg-white/5 transition-all cursor-pointer">
+               <div class="w-16 h-16 rounded-full bg-white dark:bg-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <RocketLaunchIcon class="w-8 h-8 text-zinc-400 dark:text-white" />
+               </div>
+               <h3 class="text-xl font-bold text-zinc-900 dark:text-white">Next Big Thing</h3>
+               <p class="text-sm text-zinc-500 mt-2">Coming Soon</p>
             </div>
+
          </div>
       </section>
 
