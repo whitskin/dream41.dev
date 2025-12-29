@@ -345,6 +345,12 @@ const skills = [
   { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
 ]
 
+defineOgImage({ 
+  component: 'DreamTemplate', 
+  props: { title: 'Dream41', 
+  description: `Hello, I'm Dream41 — a passionate full stack developer with a deep interest in building modern, scalable web applications. I enjoy turning creative ideas into clean, efficient code. Always learning, always improving — let's create something remarkable together.` }, 
+});
+
 useHead({
   title: 'Dream41 | Full-Stack Developer Portfolio',
   meta: [
@@ -352,9 +358,9 @@ useHead({
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { name: 'author', content: 'Dream41' },
     { name: 'theme-color', content: '#3B82F6' },
-    { name: 'description', content: 'Premium portfolio of Dream41, a full-stack developer specializing in modern web applications.' },
+    { name: 'description', content: 'Premium portfolio of Dream41, a full-stack developer specializing in modern, scalable web applications, clean code, high performance, and innovative digital solutions.' },
     { name: 'og:title', content: 'Dream41 | Full-Stack Developer Portfolio' },
-    { name: 'og:description', content: 'Premium portfolio of Dream41, a full-stack developer specializing in modern web applications.' },
+    { name: 'og:description', content: 'Premium portfolio of Dream41, a full-stack developer specializing in modern, scalable web applications, clean code, high performance, and innovative digital solutions.' },
     { name: 'og:type', content: 'website' },
     { name: 'og:url', content: 'https://dream41.dev' },
   ],
