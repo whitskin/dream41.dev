@@ -1,36 +1,32 @@
 <template>
-  <!-- Renk moduna tam duyarlı ana kapsayıcı -->
-  <div class="relative min-h-screen selection:bg-indigo-600 selection:text-white font-sans transition-colors duration-700 ease-in-out bg-zinc-50 dark:bg-[#050505] text-zinc-900 dark:text-zinc-100 overflow-x-hidden">
+  <div class="relative min-h-screen selection:bg-rose-500 selection:text-white font-sans transition-colors duration-700 ease-in-out bg-slate-50 dark:bg-[#07070a] text-slate-900 dark:text-slate-100 overflow-x-hidden">
     
-    <!-- Kar Efekti (Script Korundu) -->
-    <canvas v-show="isSnowing" ref="snowCanvas" class="fixed inset-0 z-[60] pointer-events-none opacity-40 dark:opacity-20"></canvas>
+    <canvas v-show="isSnowing" ref="snowCanvas" class="fixed inset-0 z-[60] pointer-events-none opacity-50 dark:opacity-20"></canvas>
 
-    <!-- Dynamic Background Layer -->
     <div class="fixed inset-0 z-0 pointer-events-none">
-       <div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
-       <div class="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,_50%)_var(--y,_50%),rgba(79,70,229,0.1)_0%,transparent_50%)]"></div>
-       <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_90%)]"></div>
+       <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.04] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
+       <div class="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,_50%)_var(--y,_50%),rgba(244,63,94,0.15)_0%,rgba(99,102,241,0.05)_30%,transparent_60%)] filter blur-[40px]"></div>
+       <div class="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_80%)]"></div>
     </div>
 
-    <!-- Minimalist Navigation -->
-    <header class="fixed top-0 inset-x-0 z-50 flex justify-center p-6 md:p-8">
-      <nav class="bg-white/70 dark:bg-zinc-900/40 backdrop-blur-2xl border border-zinc-200/50 dark:border-white/5 rounded-2xl py-3 px-6 flex items-center justify-between w-full max-w-6xl transition-all duration-500 shadow-xl shadow-black/5">
+    <header class="fixed top-6 inset-x-0 z-50 flex justify-center px-4">
+      <nav class="bg-white/40 dark:bg-zinc-950/40 backdrop-blur-3xl border border-white/20 dark:border-white/5 rounded-full py-2.5 pl-6 pr-3 flex items-center justify-between w-full max-w-5xl transition-all duration-500 shadow-[0_20px_50px_rgba(0,0,0,0.03)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
         
-        <NuxtLink to="/" class="flex items-center gap-3 group">
-           <div class="w-8 h-8 bg-zinc-900 dark:bg-white flex items-center justify-center rounded-lg transition-transform duration-500 group-hover:rotate-[90deg]">
-             <span class="text-white dark:text-black font-black text-xs uppercase">D</span>
+        <NuxtLink to="/" class="flex items-center gap-3.5 group">
+           <div class="w-7 h-7 bg-rose-500 dark:bg-white flex items-center justify-center rounded-full transition-all duration-500 group-hover:scale-110 group-hover:rotate-[360deg]">
+             <span class="text-white dark:text-black font-black text-xs">Δ</span>
            </div>
            <div class="flex flex-col">
-             <span class="font-bold tracking-tight text-sm">DREAM41</span>
-             <span class="text-[7px] font-bold tracking-[0.3em] opacity-40 uppercase italic">Code & Aesthetics</span>
+             <span class="font-black tracking-widest text-xs uppercase bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-zinc-400">DREAM41</span>
+             <span class="text-[6.5px] font-bold tracking-[0.4em] text-rose-500 uppercase">Aesthetic Core</span>
            </div>
         </NuxtLink>
 
-        <div class="flex items-center gap-2">
-           <button @click="toggleSnow" class="p-2 rounded-xl hover:bg-zinc-200 dark:hover:bg-white/10 transition-all" :class="isSnowing ? 'text-indigo-600' : 'opacity-40'">
+        <div class="flex items-center gap-1.5">
+           <button @click="toggleSnow" class="p-2 rounded-full hover:bg-slate-200/50 dark:hover:bg-white/5 transition-all duration-300" :class="isSnowing ? 'text-rose-500' : 'opacity-50'">
              <CloudIcon class="w-4 h-4" />
            </button>
-           <button @click="toggleTheme" class="p-2 rounded-xl hover:bg-zinc-200 dark:hover:bg-white/10 transition-all opacity-40 hover:opacity-100">
+           <button @click="toggleTheme" class="p-2 rounded-full bg-slate-100 dark:bg-zinc-900 border border-slate-200/50 dark:border-white/5 text-slate-700 dark:text-zinc-300 shadow-sm transition-transform active:scale-95">
              <SunIcon v-if="colorMode.value === 'light'" class="w-4 h-4" />
              <MoonIcon v-else class="w-4 h-4" />
            </button>
@@ -38,139 +34,150 @@
       </nav>
     </header>
 
-    <main class="relative z-10 pt-48 pb-32 px-6 max-w-6xl mx-auto space-y-48">
+    <main class="relative z-10 pt-40 pb-24 px-4 max-w-5xl mx-auto space-y-40">
       
-      <!-- Hero Section -->
-      <section class="space-y-10">
-        <div v-motion :initial="{ opacity: 0, x: -20 }" :enter="{ opacity: 1, x: 0 }" class="flex items-center gap-3 text-indigo-600 dark:text-indigo-500">
-          <div class="h-[1px] w-10 bg-current"></div>
-          <span class="text-[9px] font-black uppercase tracking-[0.4em]">Software Engineer & UI/UX Designer</span>
+      <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-8 space-y-8">
+          <div v-motion :initial="{ opacity: 0, y: -10 }" :enter="{ opacity: 1, y: 0 }" class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/10 text-rose-500">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
+            <span class="text-[9px] font-black uppercase tracking-[0.25em]">System Architect & Creator</span>
+          </div>
+
+          <h1 v-motion :initial="{ opacity: 0, x: -30 }" :enter="{ opacity: 1, x: 0, transition: { duration: 800 } }" class="text-5xl md:text-7xl font-black tracking-tight leading-[0.9] uppercase">
+            Sculpting <br />
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-rose-500 via-indigo-500 to-cyan-500">Digital Reality</span> <br />
+            With Pixel Precision.
+          </h1>
         </div>
 
-        <h1 v-motion :initial="{ opacity: 0, y: 30 }" :enter="{ opacity: 1, y: 0, transition: { duration: 800 } }" class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] uppercase">
-          Crafting <span class="text-zinc-400 dark:text-zinc-500 italic font-light">Intuitive</span> <br /> 
-          Digital Ecosystems.
-        </h1>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-6">
-          <p v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, transition: { delay: 400 } }" class="text-lg md:text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed font-light">
-            I architect high-performance web applications that merge technical complexity with surgical aesthetic precision. Open for <span class="text-zinc-900 dark:text-white font-medium italic underline decoration-indigo-500/30 underline-offset-8">innovation</span>.
+        <div class="lg:col-span-4 lg:pt-14 space-y-8 flex flex-col justify-between h-full">
+          <p v-motion :initial="{ opacity: 0 }" :enter="{ opacity: 1, transition: { delay: 300 } }" class="text-base text-slate-500 dark:text-zinc-400 leading-relaxed font-light">
+            Engineering lightning-fast digital pipelines and ultra-premium visual shells. Bridging high-scale execution with radical human-centered interfaces.
           </p>
-          <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0, transition: { delay: 600 } }" class="flex items-end md:justify-end gap-4">
-            <a href="#projects" class="px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-indigo-600 hover:text-white transition-all shadow-xl shadow-black/10">
-              Browse Work
+          
+          <div v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0, transition: { delay: 500 } }" class="flex flex-wrap items-center gap-3">
+            <a href="#projects" class="group px-6 py-3.5 bg-slate-900 dark:bg-white text-white dark:text-black rounded-full font-bold uppercase text-[9px] tracking-widest hover:bg-rose-500 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white transition-all duration-300 shadow-xl shadow-rose-500/5 flex items-center gap-2">
+              Explore Vault <ArrowRightIcon class="w-3 h-3 group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="mailto:contact@dream41.dev" class="px-8 py-4 border border-zinc-200 dark:border-white/10 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
-              Inquire
+            <a href="mailto:contact@dream41.dev" class="px-6 py-3.5 rounded-full border border-slate-200 dark:border-white/10 font-bold uppercase text-[9px] tracking-widest hover:border-slate-900 dark:hover:border-white transition-colors">
+              Establish Liaison
             </a>
           </div>
         </div>
       </section>
 
-      <!-- Discord Status / Spotify Card (Kanka Burası Geri Geldi) -->
-      <section v-if="discordData" v-motion :initial="{ opacity: 0, y: 20 }" :enter="{ opacity: 1, y: 0, transition: { delay: 500 } }" class="flex justify-start">
-        <div class="group relative flex items-center gap-5 p-4 rounded-[2rem] bg-white/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/5 shadow-2xl shadow-black/5 backdrop-blur-xl max-w-sm w-full transition-all duration-500 hover:border-indigo-500/30">
+      <section v-if="discordData" v-motion :initial="{ opacity: 0, scale: 0.95 }" :enter="{ opacity: 1, scale: 1, transition: { delay: 400 } }" class="flex justify-start">
+        <div class="group relative flex items-center gap-5 p-4 rounded-3xl bg-gradient-to-br from-white/80 to-white/40 dark:from-zinc-900/80 dark:to-zinc-950/20 border border-white dark:border-white/5 shadow-2xl dark:shadow-black/40 backdrop-blur-2xl max-w-sm w-full transition-all duration-500 hover:scale-[1.02] hover:border-rose-500/20">
           <div class="relative shrink-0">
-             <img :src="`https://cdn.discordapp.com/avatars/${discordData.discord_user.id}/${discordData.discord_user.avatar}`" class="w-14 h-14 rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-500 object-cover border border-zinc-100 dark:border-white/10" alt="Avatar" />
-             <div class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-4 border-white dark:border-zinc-900 shadow-sm" :class="statusColor"></div>
+             <img :src="`https://cdn.discordapp.com/avatars/${discordData.discord_user.id}/${discordData.discord_user.avatar}`" class="w-12 h-12 rounded-2xl transition-all duration-500 object-cover border border-slate-100 dark:border-white/5" alt="Avatar Portfolio" />
+             <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full border-4 border-white dark:border-zinc-900" :class="statusColor"></div>
           </div>
           
           <div class="flex-1 min-w-0">
-             <div class="flex items-center gap-1.5 mb-1 text-[8px] font-black uppercase tracking-[0.2em] text-zinc-400">
-                <span v-if="discordData.listening_to_spotify" class="text-green-500 animate-pulse">Spotify Syncing</span>
-                <span v-else>Current Status</span>
+             <div class="flex items-center gap-1.5 mb-0.5 text-[8px] font-black uppercase tracking-[0.2em]">
+                <span v-if="discordData.listening_to_spotify" class="text-emerald-500 animate-pulse">Streaming Audio</span>
+                <span v-else class="text-rose-500">Live Telemetry</span>
              </div>
-             <h4 class="text-sm font-black truncate uppercase tracking-tight">
+             <h4 class="text-xs font-black truncate uppercase tracking-wide text-slate-800 dark:text-zinc-200">
                 {{ discordData.listening_to_spotify ? discordData.spotify.song : discordStatusText }}
              </h4>
-             <p class="text-[10px] font-bold text-zinc-500 truncate italic">
-                {{ discordData.listening_to_spotify ? `by ${discordData.spotify.artist}` : 'Processing Code' }}
+             <p class="text-[10px] text-slate-400 dark:text-zinc-500 truncate font-mono">
+                {{ discordData.listening_to_spotify ? `by ${discordData.spotify.artist}` : 'Awaiting Compile' }}
              </p>
           </div>
 
-          <div v-if="discordData.listening_to_spotify" class="flex gap-0.5 items-end h-4 ml-2">
-             <div class="w-0.5 bg-green-500 rounded-full animate-[bounce_0.8s_infinite] h-2"></div>
-             <div class="w-0.5 bg-green-500 rounded-full animate-[bounce_1.2s_infinite] h-4"></div>
-             <div class="w-0.5 bg-green-500 rounded-full animate-[bounce_1s_infinite] h-3"></div>
+          <div v-if="discordData.listening_to_spotify" class="flex gap-0.5 items-end h-3 ml-2 shrink-0">
+             <div class="w-0.5 bg-emerald-500 rounded-full animate-[bounce_0.8s_infinite] h-2"></div>
+             <div class="w-0.5 bg-emerald-500 rounded-full animate-[bounce_1.2s_infinite] h-3.5"></div>
+             <div class="w-0.5 bg-emerald-500 rounded-full animate-[bounce_1s_infinite] h-2.5"></div>
           </div>
         </div>
       </section>
 
-      <!-- Tech Stack Marquee -->
-      <section class="py-16 border-y border-zinc-200 dark:border-white/5 relative overflow-hidden group">
-        <div class="flex gap-20 animate-marquee whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused]">
-          <div class="flex gap-20 items-center shrink-0">
-            <div v-for="skill in skills" :key="skill.name" class="flex items-center gap-6 group/skill transition-all duration-500 hover:scale-105">
-              <div class="w-12 h-12 p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-white/5 flex items-center justify-center shadow-sm grayscale group-hover/skill:grayscale-0 transition-all">
+      <section class="py-10 border-y border-slate-200 dark:border-white/5 relative overflow-hidden group">
+        <div class="flex gap-16 animate-marquee whitespace-nowrap will-change-transform group-hover:[animation-play-state:paused]">
+          <div class="flex gap-16 items-center shrink-0">
+            <div v-for="skill in skills" :key="skill.name" class="flex items-center gap-4 group/skill">
+              <div class="w-9 h-9 p-2 rounded-xl bg-white dark:bg-zinc-900 border border-slate-100 dark:border-white/5 flex items-center justify-center shadow-sm grayscale group-hover/skill:grayscale-0 transition-all duration-300 group-hover/skill:rotate-6">
                 <img :src="skill.icon" :alt="skill.name" class="w-full h-full object-contain" />
               </div>
-              <span class="text-3xl font-black italic tracking-tighter opacity-10 hover:opacity-100 transition-all uppercase">{{ skill.name }}</span>
+              <span class="text-xl font-black tracking-tight text-slate-300 dark:text-zinc-700 group-hover/skill:text-rose-500 transition-colors uppercase font-mono">{{ skill.name }}</span>
             </div>
           </div>
-          <!-- Loop Repeat -->
-          <div class="flex gap-20 items-center shrink-0">
-            <div v-for="skill in skills" :key="skill.name + '_copy'" class="flex items-center gap-6 group/skill transition-all duration-500 hover:scale-105">
-              <div class="w-12 h-12 p-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-white/5 flex items-center justify-center shadow-sm grayscale group-hover/skill:grayscale-0 transition-all">
+          <div class="flex gap-16 items-center shrink-0">
+            <div v-for="skill in skills" :key="skill.name + '_copy'" class="flex items-center gap-4 group/skill">
+              <div class="w-9 h-9 p-2 rounded-xl bg-white dark:bg-zinc-900 border border-slate-100 dark:border-white/5 flex items-center justify-center shadow-sm grayscale group-hover/skill:grayscale-0 transition-all duration-300 group-hover/skill:rotate-6">
                 <img :src="skill.icon" :alt="skill.name" class="w-full h-full object-contain" />
               </div>
-              <span class="text-3xl font-black italic tracking-tighter opacity-10 hover:opacity-100 transition-all uppercase">{{ skill.name }}</span>
+              <span class="text-xl font-black tracking-tight text-slate-300 dark:text-zinc-700 group-hover/skill:text-rose-500 transition-colors uppercase font-mono">{{ skill.name }}</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Projects Section -->
-      <section id="projects" class="space-y-16">
-        <div class="space-y-2">
-          <span class="text-[9px] font-black tracking-[0.5em] text-indigo-600 dark:text-indigo-500 uppercase italic">Selected Productions</span>
-          <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter italic">Portfolio Showcase</h2>
+      <section id="projects" class="space-y-12">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div class="space-y-1">
+            <span class="text-[9px] font-black tracking-[0.4em] text-rose-500 uppercase">Selected Archetypes</span>
+            <h2 class="text-3xl md:text-4xl font-black uppercase tracking-tight">Engineering Index</h2>
+          </div>
+          <p class="text-xs text-slate-400 dark:text-zinc-500 max-w-xs font-mono">
+            // Real-time operations, high density rendering pipelines, production environments.
+          </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-          <!-- Project 01 -->
-          <div class="md:col-span-8 group relative overflow-hidden rounded-[2.5rem] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-white/5 shadow-sm" v-motion-slide-visible-once-bottom>
-             <div class="aspect-[16/9] overflow-hidden">
-                <img src="/images/grafiklab.png" class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105" />
-             </div>
-             <div class="absolute inset-0 bg-zinc-900/80 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-end p-10">
-                <h3 class="text-3xl font-black uppercase italic tracking-tighter text-white">GrafikLab.NET</h3>
-                <p class="text-zinc-300 text-sm max-w-md mt-2 font-light">Comprehensive API distribution platform engineered for high-scale agency workflows.</p>
-                <a href="https://grafiklab.net" target="_blank" class="mt-6 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-indigo-400">Launch Module <ArrowUpRightIcon class="w-4 h-4" /></a>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div class="md:col-span-7 group relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 border border-slate-200/60 dark:border-white/5 shadow-sm transition-all duration-500 hover:shadow-2xl dark:hover:shadow-black/60" v-motion-slide-visible-once-bottom>
+             <div class="aspect-[16/10] overflow-hidden relative">
+                <img src="/images/grafiklab.png" class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 filter saturate-75 group-hover:saturate-100" alt="GrafikLab Module" />
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent opacity-80 group-hover:opacity-95 transition-all duration-500 flex flex-col justify-end p-8">
+                  <span class="text-[8px] font-mono tracking-widest text-rose-400 uppercase mb-1">[ Cluster Project 01 ]</span>
+                  <h3 class="text-2xl font-black uppercase tracking-tight text-white">GrafikLab.NET</h3>
+                  <p class="text-zinc-400 text-xs max-w-md mt-2 font-light leading-relaxed">High-scale API distribution platform tailored for complex enterprise automated graphics distribution and multi-tenant management.</p>
+                  <a href="https://grafiklab.net" target="_blank" class="mt-4 inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-white bg-rose-500 px-4 py-2 rounded-full w-max hover:bg-white hover:text-black transition-all">
+                    Launch Core <ArrowUpRightIcon class="w-3 h-3" />
+                  </a>
+                </div>
              </div>
           </div>
 
-          <!-- Project 02 -->
-          <div class="md:col-span-4 flex flex-col bg-white dark:bg-zinc-900/40 p-10 rounded-[2.5rem] border border-zinc-200 dark:border-white/5 group hover:border-indigo-600/30 transition-all shadow-sm" v-motion-slide-visible-once-bottom>
-            <div class="aspect-square rounded-2xl overflow-hidden mb-8 border border-zinc-100 dark:border-white/5 relative bg-zinc-50 dark:bg-zinc-800">
-               <img src="/images/sporapi.png" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
-            </div>
+          <div class="md:col-span-5 flex flex-col justify-between bg-gradient-to-b from-white to-slate-50 dark:from-zinc-900 dark:to-zinc-950/50 p-8 rounded-3xl border border-slate-200/60 dark:border-white/5 group hover:border-rose-500/20 transition-all duration-500 shadow-sm" v-motion-slide-visible-once-bottom>
             <div class="space-y-4">
-              <span class="text-[9px] font-black tracking-widest opacity-30 uppercase italic italic">Live Data Ecosystem</span>
-              <h3 class="text-2xl font-black uppercase tracking-tighter leading-none italic">Spor. <br/> GrafikLab</h3>
-              <p class="text-zinc-500 dark:text-zinc-400 text-xs font-medium leading-relaxed italic">High-performance WebSocket architecture for real-time sports broadcasting.</p>
+              <div class="aspect-[4/3] rounded-2xl overflow-hidden border border-slate-100 dark:border-white/5 relative bg-slate-100 dark:bg-zinc-900">
+                 <img src="/images/sporapi.png" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-102" alt="Sports API Engine" />
+              </div>
+              <div class="space-y-1">
+                <span class="text-[8px] font-mono tracking-widest text-slate-400 uppercase">// Streaming Engine</span>
+                <h3 class="text-xl font-black uppercase tracking-tight text-slate-800 dark:text-zinc-100">Spor.GrafikLab</h3>
+                <p class="text-slate-500 dark:text-zinc-400 text-xs font-light leading-relaxed">Reactive WebSocket interface engineered for millisecond precision sports data broadcast.</p>
+              </div>
             </div>
-            <a href="https://spor.grafiklab.net" target="_blank" class="mt-8 py-4 border border-zinc-200 dark:border-white/10 rounded-xl flex items-center justify-center gap-2 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all font-black uppercase tracking-widest text-[9px]">
-              Access Demo <ArrowRightIcon class="w-3 h-3" />
+            <a href="https://spor.grafiklab.net" target="_blank" class="mt-6 py-3 border border-slate-200 dark:border-white/10 rounded-xl flex items-center justify-center gap-2 hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all font-bold uppercase tracking-widest text-[9px]">
+              Access Simulation <ArrowRightIcon class="w-3 h-3" />
             </a>
           </div>
         </div>
       </section>
 
-      <!-- Contact Interface -->
-      <section id="contact" class="pb-32 text-center">
-        <div class="relative p-12 md:p-24 rounded-[3.5rem] bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black overflow-hidden group shadow-2xl">
-          <div class="absolute inset-0 opacity-[0.15] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
-          <div class="relative z-10 space-y-10">
-            <h2 class="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none italic italic">
-              Ready for <br /> 
-              The Next <span class="text-indigo-500 italic">Evolution.</span>
+      <section id="contact" class="pb-16">
+        <div class="relative p-8 md:p-16 rounded-[2.5rem] bg-gradient-to-tr from-slate-950 via-zinc-900 to-rose-950 text-white overflow-hidden group shadow-2xl border border-white/5">
+          <div class="absolute inset-0 opacity-[0.08] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+          <div class="absolute -right-16 -top-16 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+          
+          <div class="relative z-10 max-w-2xl mx-auto text-center space-y-8">
+            <h2 class="text-3xl md:text-6xl font-black uppercase tracking-tight leading-none">
+              Initiate <br />
+              The Next <span class="bg-clip-text text-transparent bg-gradient-to-r from-rose-400 to-amber-300">Convergence.</span>
             </h2>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-              <a href="mailto:contact@dream41.dev" class="px-10 py-5 bg-indigo-600 dark:bg-black text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:scale-105 transition-transform shadow-2xl shadow-indigo-500/20">
-                Email Terminal
+            <p class="text-xs md:text-sm text-zinc-400 font-light max-w-md mx-auto">
+              Currently accepting global directives, core refactoring projects, and high-end collaborative application design architecture requests.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3 pt-2">
+              <a href="mailto:contact@dream41.dev" class="px-8 py-4 bg-rose-500 hover:bg-white hover:text-black text-white rounded-full font-black uppercase tracking-widest text-[9px] transition-all shadow-xl shadow-rose-500/20">
+                Establish Direct Link
               </a>
-              <a href="https://discord.com/users/1147956655384956978" target="_blank" class="px-10 py-5 bg-white/10 dark:bg-zinc-800 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-white/20 dark:hover:bg-black transition-all">
-                Discord HQ
+              <a href="https://discord.com/users/1147956655384956978" target="_blank" class="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-full font-black uppercase tracking-widest text-[9px] transition-all">
+                Secure Discord Uplink
               </a>
             </div>
           </div>
@@ -178,13 +185,13 @@
       </section>
     </main>
 
-    <footer class="py-16 border-t border-zinc-200 dark:border-white/5 px-6">
-       <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-12 opacity-30">
-          <div class="space-y-2 text-center md:text-left">
-            <h5 class="text-2xl font-black italic tracking-tighter uppercase leading-none">Dream41 // 4.0</h5>
-            <p class="text-[8px] font-black uppercase tracking-[0.5em]">Digital Innovation Hub // Turkey</p>
+    <footer class="py-12 border-t border-slate-200 dark:border-white/5 px-4 bg-slate-100/50 dark:bg-zinc-950/20">
+       <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 opacity-40 hover:opacity-100 transition-opacity duration-300">
+          <div class="space-y-1 text-center md:text-left">
+            <h5 class="text-sm font-black tracking-widest uppercase text-slate-800 dark:text-white">Dream41 Matrix v4.0</h5>
+            <p class="text-[8px] font-mono uppercase tracking-[0.3em]">Autonomous Node // Istanbul, Turkey</p>
           </div>
-          <p class="text-[9px] font-black uppercase tracking-[0.3em]">Code // Architecture // Design</p>
+          <p class="text-[8px] font-mono uppercase tracking-[0.2em] text-center md:text-right">Aesthetics // Full-Stack Architecture // 2026</p>
        </div>
     </footer>
   </div>
@@ -192,10 +199,10 @@
 
 <script setup>
 import { 
-  SunIcon, MoonIcon, ArrowRightIcon, ArrowUpRightIcon, 
-  CloudIcon, RocketLaunchIcon, EnvelopeIcon, ChatBubbleLeftRightIcon
+  SunIcon, MoonIcon, ArrowRightIcon, ArrowUpRightIcon, CloudIcon 
 } from '@heroicons/vue/24/outline'
 import { useDocumentVisibility, useWindowSize, useMouse } from '@vueuse/core'
+import { computed, ref, watchEffect, nextTick } from 'vue'
 
 const colorMode = useColorMode()
 const toggleTheme = () => { colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark' }
@@ -220,17 +227,17 @@ if (import.meta.client) {
 
 const statusColor = computed(() => {
   switch(discordData.value?.discord_status) {
-    case 'online': return 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]'
-    case 'idle': return 'bg-amber-500'
-    case 'dnd': return 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)]'
-    default: return 'bg-zinc-500'
+    case 'online': return 'bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]'
+    case 'idle': return 'bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.4)]'
+    case 'dnd': return 'bg-rose-500 shadow-[0_0_12px_rgba(244,63,94,0.6)]'
+    default: return 'bg-slate-500'
   }
 })
 
 const discordStatusText = computed(() => {
   const status = discordData.value?.discord_status
-  if (!status) return 'Offline'
-  return status.charAt(0).toUpperCase() + status.slice(1)
+  if (!status) return 'Offline Matrix'
+  return status.charAt(0).toUpperCase() + status.slice(1) + ' Hub'
 })
 
 const isSnowing = ref(false)
@@ -253,21 +260,21 @@ const initSnow = () => {
   let height = window.innerHeight
   canvas.width = width
   canvas.height = height
-  const particleCount = windowWidth.value < 768 ? 30 : 80
+  const particleCount = windowWidth.value < 768 ? 25 : 70
   particles = []
   for (let i = 0; i < particleCount; i++) {
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      radius: Math.random() * 1.5 + 0.5,
-      speedY: Math.random() * 0.8 + 0.2,
-      speedX: Math.random() * 0.3 - 0.15
+      radius: Math.random() * 1.2 + 0.4,
+      speedY: Math.random() * 0.6 + 0.2,
+      speedX: Math.random() * 0.2 - 0.1
     })
   }
   const draw = () => {
     if (visibility.value !== 'visible') { animationFrame = requestAnimationFrame(draw); return }
     ctx.clearRect(0, 0, width, height)
-    ctx.fillStyle = colorMode.value === 'dark' ? '#ffffff' : '#475569'
+    ctx.fillStyle = colorMode.value === 'dark' ? 'rgba(255, 255, 255, 0.7)' : 'rgba(15, 23, 42, 0.5)'
     ctx.beginPath()
     for (let i = 0; i < particleCount; i++) {
       const p = particles[i]
@@ -308,12 +315,12 @@ defineOgImage({
 });
 
 useHead({
-    title: 'Dream41 | Full-Stack Developer Portfolio',
+  title: 'Dream41 | Full-Stack Developer Portfolio',
   meta: [
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { name: 'author', content: 'Dream41' },
-    { name: 'theme-color', content: '#3B82F6' },
+    { name: 'theme-color', content: '#F43F5E' },
     { name: 'description', content: 'Premium portfolio of Dream41, a full-stack developer specializing in modern, scalable web applications, clean code, high performance, and innovative digital solutions.' },
     { name: 'og:title', content: 'Dream41 | Full-Stack Developer Portfolio' },
     { name: 'og:description', content: 'Premium portfolio of Dream41, a full-stack developer specializing in modern, scalable web applications, clean code, high performance, and innovative digital solutions.' },
@@ -328,15 +335,13 @@ useHead({
 </script>
 
 <style>
-.animate-marquee { animation: marquee 45s linear infinite; }
+.animate-marquee { animation: marquee 35s linear infinite; }
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-body { transition: background-color 0.5s ease; }
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #050505; }
-::-webkit-scrollbar-thumb { background: #1f1f1f; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #4F46E5; }
-
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #07070a; }
+::-webkit-scrollbar-thumb { background: #1e1e24; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #f43f5e; }
 </style>
