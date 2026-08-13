@@ -329,7 +329,7 @@ useHead({
   ],
   link: [
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@300;500;900&display=swap' },
-    { rel: 'icon', type: 'image/png', href: 'https://cdn.discordapp.com/avatars/1147956655384956978/a_b05c99a6bc6eae33af22831d6e41341b.png?size=4096' },
+    { rel: 'icon', type: 'image/png', href: 'https://cdn.discordapp.com/avatars/1147956655384956978/a_ee458fb26071339fd1b73c49e0e15832' },
   ],
 });
 </script>
